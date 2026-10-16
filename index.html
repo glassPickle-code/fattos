@@ -1,221 +1,293 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FattOs™ — The Native Operating System for Autonomous Robotics</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Fredoka, Alex Brush, Inter -->
+    <title>FattOs™ — The Native OS for Autonomous Robotics</title>
+    <meta name="description" content="FattOs is a native operating system for microcontrollers, enabling autonomous robots and physical AI to run entirely on single low-cost chips. Built for ESP32-S3, STM32F4, and STM32F7+.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Fredoka:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --color-rose: #eba4ca;
-            --color-tan: #aa9772;
-            --color-gold: #c3a15d;
-            --bg-cream: #FAF8F5;
-            --text-dark: #2B2823;
-            --text-muted: #625B50;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-cream);
-            color: var(--text-dark);
-            margin: 0;
-            padding: 0;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        .font-fredoka {
-            font-family: 'Fredoka', sans-serif;
-        }
-
-        .font-alex {
-            font-family: 'Alex Brush', cursive;
-        }
-
-        /* Custom color classes */
-        .text-tan { color: var(--color-tan); }
-        .text-gold { color: var(--color-gold); }
-        .text-rose { color: var(--color-rose); }
-        .bg-rose { background-color: var(--color-rose); }
-        .bg-tan { background-color: var(--color-tan); }
-
-        /* Smooth interactive hover transitions */
-        .btn-primary {
-            background-color: var(--color-rose);
-            color: #FFFFFF;
-            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .btn-primary:hover {
-            background-color: var(--color-gold);
-            transform: translateY(-1px);
-        }
-
-        .btn-secondary {
-            color: var(--color-tan);
-            border-bottom: 1.5px solid var(--color-tan);
-            transition: all 0.2s ease;
-        }
-        .btn-secondary:hover {
-            color: var(--color-gold);
-            border-color: var(--color-gold);
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Fredoka:wght@300;400;500;600;700&family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;1,14..32,300;1,14..32,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
-<body class="min-h-screen flex flex-col justify-between selection:bg-[#eba4ca] selection:text-white">
 
-    <!-- Hero / Top Section -->
-    <header class="w-full max-w-4xl mx-auto px-6 pt-16 md:pt-24 pb-12 text-center flex flex-col items-center">
-        <!-- Centered Logo (180px-220px range) -->
-        <div class="mb-8 w-48 md:w-52 h-auto flex justify-center items-center">
-            <img src="FattOs.png" alt="FattOs Logo" class="max-w-full h-auto object-contain" onerror="this.onerror=null; this.src='https://placehold.co/220x220/FAF8F5/aa9772?text=FattOs';">
+<body>
+
+    <!-- ── NAV ───────────────────────────────────────────────── -->
+    <nav id="nav" aria-label="Main navigation">
+        <div class="nav-inner">
+            <a href="#top" class="nav-logo" aria-label="FattOs home">
+                <img src="FattOs.png" alt="FattOs logo mark" class="nav-logo-img" width="36" height="36">
+                <span class="nav-logo-text">FattOs<sup>™</sup></span>
+            </a>
+            <ul class="nav-links" role="list">
+                <li><a href="#vision">Vision</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#silicon">Silicon</a></li>
+                <li><a href="#stickers">Stickers</a></li>
+            </ul>
+            <a href="#cta" class="nav-cta">Get Started</a>
+            <button class="nav-hamburger" id="navHamburger" aria-label="Toggle menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ── HERO ──────────────────────────────────────────────── -->
+    <section id="top" class="hero">
+        <div class="hero-bg" aria-hidden="true">
+            <div class="hero-grain"></div>
+            <div class="hero-glow glow-1"></div>
+            <div class="hero-glow glow-2"></div>
+            <div class="hero-glow glow-3"></div>
         </div>
 
-        <!-- Title -->
-        <h1 class="font-fredoka text-5xl md:text-7xl font-semibold tracking-tight text-tan mb-4">
-            FattOs<span class="text-3xl md:text-4xl align-top text-gold font-normal">™</span>
-        </h1>
-
-        <!-- Tagline -->
-        <p class="font-fredoka text-xl md:text-3xl font-medium text-[#2B2823] max-w-3xl leading-snug mb-8">
-            The Native Operating System for Microcontrollers & Physical AI
-        </p>
-
-        <!-- Accent Line Divider -->
-        <div class="w-16 h-0.5 bg-[#aa9772]/30 my-2"></div>
-    </header>
-
-    <!-- The Vision / Flowing Narrative Section (No Blocks or Cards) -->
-    <section class="w-full max-w-3xl mx-auto px-6 py-8 text-center md:text-left">
-        <h2 class="font-fredoka text-2xl md:text-3xl text-gold mb-6 text-center">
-            Run Entire Robots Natively on Silicon
-        </h2>
-        
-        <p class="text-base md:text-lg text-[#625B50] font-normal leading-relaxed mb-6">
-            <strong class="text-[#2B2823] font-medium">FattOs</strong> brings a complete, native operating system to microcontrollers—enabling autonomous physical machines, smart devices, and robotics to run entirely on single low-cost chips without heavy coprocessors or tethered cloud computing.
-        </p>
-
-        <p class="text-base md:text-lg text-[#625B50] font-normal leading-relaxed mb-6">
-            By unifying hard real-time safety loops, deterministic motor control, and local INT8 machine learning in an ultra-compact footprint, FattOs gives microcontrollers the native power to perceive, decide, and move instantly.
-        </p>
-
-        <p class="text-base md:text-lg text-[#625B50] font-normal leading-relaxed">
-            Designed natively for silicon families like the <span class="text-[#2B2823] font-medium">ESP32-S3</span> dual-core series, <span class="text-[#2B2823] font-medium">STM32F4</span> Cortex-M4, and <span class="text-[#2B2823] font-medium">STM32F7+</span> Cortex-M7 architectures, FattOs makes physical AI simple, power-efficient, and rock-solid.
-        </p>
-    </section>
-
-    <!-- Subtle Divider -->
-    <div class="w-full max-w-2xl mx-auto my-10 border-t border-[#aa9772]/20"></div>
-
-    <!-- Feature Pillars Section (Typographic Layout) -->
-    <section class="w-full max-w-4xl mx-auto px-6 py-6">
-        <h3 class="font-fredoka text-center text-xl md:text-2xl text-tan mb-12">
-            Engineered for Autonomous Hardware
-        </h3>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
-            <!-- Pillar 1 -->
-            <div class="flex flex-col items-start">
-                <div class="font-fredoka text-lg font-semibold text-gold mb-2 flex items-center gap-2">
-                    <span class="w-2 h-2 rounded-full bg-rose inline-block"></span>
-                    Native Robot Intelligence
-                </div>
-                <p class="text-sm md:text-base text-[#625B50] leading-relaxed">
-                    Power complete autonomous devices directly on a single microcontroller. Execute drive trains, sensor fusion, and navigation loops on-chip without relying on external Linux single-board computers.
-                </p>
+        <div class="hero-inner">
+            <div class="hero-badge reveal">
+                <span class="badge-dot"></span>
+                In Active Development · Not Public Yet
             </div>
 
-            <!-- Pillar 2 -->
-            <div class="flex flex-col items-start">
-                <div class="font-fredoka text-lg font-semibold text-gold mb-2 flex items-center gap-2">
-                    <span class="w-2 h-2 rounded-full bg-tan inline-block"></span>
-                    Integrated Micro-AI Engine
-                </div>
-                <p class="text-sm md:text-base text-[#625B50] leading-relaxed">
-                    Native execution pipelines for INT8 neural networks, vision perception models, and occupancy grids optimized directly for MCU vector instructions and dual-core execution.
-                </p>
+            <div class="hero-logo reveal" style="--d:0.1s">
+                <img src="FattOs.png" alt="FattOs" width="180" height="180" fetchpriority="high">
             </div>
 
-            <!-- Pillar 3 -->
-            <div class="flex flex-col items-start">
-                <div class="font-fredoka text-lg font-semibold text-gold mb-2 flex items-center gap-2">
-                    <span class="w-2 h-2 rounded-full bg-gold inline-block"></span>
-                    Multi-Chip Support
-                </div>
-                <p class="text-sm md:text-base text-[#625B50] leading-relaxed">
-                    Built natively for ESP32-S3 (Xtensa dual-core), STM32F4 (Cortex-M4), STM32F7+ (Cortex-M7), and beyond—offering consistent, zero-overhead scheduling across architectures.
-                </p>
-            </div>
+            <h1 class="hero-title reveal" style="--d:0.2s">
+                <span class="title-line">FattOs</span><sup class="title-tm">™</sup>
+            </h1>
 
-            <!-- Pillar 4 -->
-            <div class="flex flex-col items-start">
-                <div class="font-fredoka text-lg font-semibold text-gold mb-2 flex items-center gap-2">
-                    <span class="w-2 h-2 rounded-full bg-rose inline-block"></span>
-                    Sub-40 KB Zero-Allocation Architecture
-                </div>
-                <p class="text-sm md:text-base text-[#625B50] leading-relaxed">
-                    Zero dynamic memory heap allocation eliminates runtime crashes and memory fragmentation. Engineered so cleanly that both human developers and AI coding agents default to writing bug-free code.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Supported Silicon Text List -->
-    <section class="w-full max-w-3xl mx-auto px-6 pt-12 pb-8 text-center">
-        <p class="font-fredoka text-sm uppercase tracking-widest text-[#aa9772] mb-4">
-            Native Support
-        </p>
-        <p class="font-fredoka text-lg md:text-xl text-[#2B2823] flex flex-wrap justify-center items-center gap-3">
-            <span>ESP32-S3</span>
-            <span class="text-rose">•</span>
-            <span>STM32F4 Series</span>
-            <span class="text-gold">•</span>
-            <span>STM32F7+ Series</span>
-        </p>
-    </section>
-
-    <!-- Call To Action -->
-    <section class="w-full max-w-xl mx-auto px-6 py-12 text-center flex flex-col sm:flex-row items-center justify-center gap-6">
-        <button onclick="showNotice()" class="btn-primary font-fredoka px-8 py-3.5 rounded-full font-medium text-base shadow-sm">
-            Getting Started
-        </button>
-        <a href="#docs" onclick="showNotice()" class="btn-secondary font-fredoka font-medium text-base py-1">
-            Read Documentation
-        </a>
-    </section>
-
-    <!-- Footer -->
-    <footer class="w-full py-12 mt-auto">
-        <div class="max-w-3xl mx-auto px-6 text-center">
-            <!-- Subtle accent line above footer -->
-            <div class="w-12 h-0.5 bg-[#aa9772]/20 mx-auto mb-6"></div>
-            
-            <p class="font-alex text-3xl md:text-4xl text-tan tracking-wide">
-                &copy; 2026 glassPebble • FattOs™ is a trademark of glassPebble.
+            <p class="hero-tagline reveal" style="--d:0.3s">
+                The Native Operating System<br class="br-md"> for Microcontrollers &amp; Physical AI
             </p>
+
+            <p class="hero-sub reveal" style="--d:0.4s">
+                Run entire autonomous robots on a single chip — no coprocessors, no cloud.
+            </p>
+
+            <div class="hero-actions reveal" style="--d:0.5s">
+                <button id="heroGetStarted" class="btn-primary" onclick="showNotice()">Getting Started</button>
+                <button class="btn-ghost" onclick="showNotice()">Read the Docs ↗</button>
+            </div>
+
+            <div class="hero-chips reveal" style="--d:0.6s" aria-label="Supported hardware">
+                <span class="chip">ESP32-S3</span>
+                <span class="chip-sep">·</span>
+                <span class="chip">STM32F4</span>
+                <span class="chip-sep">·</span>
+                <span class="chip">STM32F7+</span>
+            </div>
+        </div>
+
+        <div class="hero-scroll-hint" aria-hidden="true">
+            <span class="scroll-line"></span>
+            <span class="scroll-label">scroll</span>
+        </div>
+    </section>
+
+    <!-- ── VISION ────────────────────────────────────────────── -->
+    <section id="vision" class="vision">
+        <div class="container">
+            <div class="section-label reveal">The Vision</div>
+            <h2 class="section-title reveal" style="--d:0.1s">
+                Run Entire Robots<br>Natively on Silicon
+            </h2>
+            <div class="vision-body">
+                <div class="vision-text">
+                    <p class="reveal" style="--d:0.15s">
+                        <strong>FattOs</strong> brings a complete, native operating system to microcontrollers — enabling
+                        autonomous physical machines, smart devices, and robotics to run entirely on single low-cost chips
+                        without heavy coprocessors or tethered cloud computing.
+                    </p>
+                    <p class="reveal" style="--d:0.25s">
+                        By unifying hard real-time safety loops, deterministic motor control, and local INT8 machine
+                        learning in an ultra-compact footprint, FattOs gives microcontrollers the native power to
+                        perceive, decide, and move instantly.
+                    </p>
+                    <p class="reveal" style="--d:0.35s">
+                        Designed natively for silicon families like the <mark>ESP32-S3</mark> dual-core series,
+                        <mark>STM32F4</mark> Cortex-M4, and <mark>STM32F7+</mark> Cortex-M7 architectures,
+                        FattOs makes physical AI simple, power-efficient, and rock-solid.
+                    </p>
+                </div>
+                <div class="vision-aside reveal" style="--d:0.2s" aria-hidden="true">
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span>
+                            <span class="code-lang">fattos.h</span>
+                        </div>
+                        <pre class="code-body"><code><span class="c-kw">#include</span> <span class="c-str">"fattos/kernel.h"</span>
+<span class="c-kw">#include</span> <span class="c-str">"fattos/motor.h"</span>
+<span class="c-kw">#include</span> <span class="c-str">"fattos/ai.h"</span>
+
+<span class="c-cm">/* Native robot loop, zero heap */</span>
+<span class="c-type">void</span> <span class="c-fn">robot_main</span>(<span class="c-type">void</span>) {
+  fos_sched_init();
+  motor_bind(<span class="c-str">DRIVE_L</span>, <span class="c-str">DRIVE_R</span>);
+  ai_pipeline_start(<span class="c-str">INT8_VISION</span>);
+  fos_run();
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── FEATURES ──────────────────────────────────────────── -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-label reveal">Engineered for Autonomous Hardware</div>
+            <h2 class="section-title reveal" style="--d:0.1s">Built Different<br>From the Ground Up</h2>
+
+            <div class="features-grid">
+
+                <article class="feature-card reveal" style="--d:0.0s">
+                    <div class="feature-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                            <circle cx="12" cy="12" r="3"/>
+                            <path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.93 4.93l2.12 2.12M16.95 16.95l2.12 2.12M4.93 19.07l2.12-2.12M16.95 7.05l2.12-2.12"/>
+                        </svg>
+                    </div>
+                    <h3>Native Robot Intelligence</h3>
+                    <p>Power complete autonomous devices directly on a single microcontroller. Execute drive trains, sensor fusion, and navigation loops on-chip — no Linux single-board computers needed.</p>
+                </article>
+
+                <article class="feature-card reveal" style="--d:0.1s">
+                    <div class="feature-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                            <rect x="2" y="3" width="20" height="14" rx="2"/>
+                            <path d="M8 21h8M12 17v4"/>
+                            <path d="M7 8h3M7 11h5"/>
+                        </svg>
+                    </div>
+                    <h3>Integrated Micro-AI Engine</h3>
+                    <p>Native execution pipelines for INT8 neural networks, vision perception models, and occupancy grids — optimised directly for MCU vector instructions and dual-core execution.</p>
+                </article>
+
+                <article class="feature-card reveal" style="--d:0.2s">
+                    <div class="feature-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                            <rect x="7" y="2" width="10" height="20" rx="2"/>
+                            <path d="M2 7h5M17 7h5M2 17h5M17 17h5M2 12h2M20 12h2"/>
+                        </svg>
+                    </div>
+                    <h3>Multi-Chip Support</h3>
+                    <p>Built natively for ESP32-S3 (Xtensa dual-core), STM32F4 (Cortex-M4), and STM32F7+ (Cortex-M7) — offering consistent, zero-overhead scheduling across architectures.</p>
+                </article>
+
+                <article class="feature-card reveal" style="--d:0.3s">
+                    <div class="feature-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                            <path d="M2 17l10 5 10-5M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
+                    <h3>Sub-40 KB Zero-Allocation Architecture</h3>
+                    <p>Zero dynamic memory heap allocation eliminates runtime crashes and memory fragmentation. Engineered so cleanly that developers and AI agents default to writing bug-free code.</p>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ── SILICON BAR ───────────────────────────────────────── -->
+    <section id="silicon" class="silicon">
+        <div class="container">
+            <p class="silicon-label reveal">Native Silicon Support</p>
+            <div class="silicon-row reveal" style="--d:0.1s">
+                <div class="silicon-chip-card">
+                    <span class="scc-name">ESP32-S3</span>
+                    <span class="scc-sub">Xtensa Dual-Core</span>
+                </div>
+                <div class="silicon-divider" aria-hidden="true"></div>
+                <div class="silicon-chip-card">
+                    <span class="scc-name">STM32F4</span>
+                    <span class="scc-sub">Cortex-M4 Series</span>
+                </div>
+                <div class="silicon-divider" aria-hidden="true"></div>
+                <div class="silicon-chip-card">
+                    <span class="scc-name">STM32F7+</span>
+                    <span class="scc-sub">Cortex-M7 Series</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── STICKERS ──────────────────────────────────────────── -->
+    <section id="stickers" class="stickers">
+        <div class="container">
+            <div class="section-label reveal">Community</div>
+            <h2 class="section-title reveal" style="--d:0.1s">FattOs Stickers</h2>
+            <p class="stickers-sub reveal" style="--d:0.2s">
+                Show your love for the project. Stickers for people building with FattOs.
+            </p>
+            <div class="stickers-grid reveal" style="--d:0.3s">
+                <figure class="sticker-frame sticker-light">
+                    <img src="FattOs-stickers.png" alt="FattOs sticker on white background" loading="lazy">
+                    <figcaption>Standard</figcaption>
+                </figure>
+                <figure class="sticker-frame sticker-dark">
+                    <img src="FattOs-stickers-nobg.png" alt="FattOs sticker, transparent background" loading="lazy">
+                    <figcaption>No Background</figcaption>
+                </figure>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── CTA ──────────────────────────────────────────────── -->
+    <section id="cta" class="cta">
+        <div class="container">
+            <div class="cta-inner reveal">
+                <div class="cta-badge">
+                    <span class="badge-dot badge-dot--amber"></span>
+                    Still Under Development
+                </div>
+                <h2 class="cta-title">FattOs is Coming.</h2>
+                <p class="cta-sub">
+                    We're building something that doesn't exist yet. A true native OS for autonomous machines —
+                    designed for the silicon, not around it.
+                </p>
+                <div class="cta-actions">
+                    <button class="btn-primary" onclick="showNotice()">Getting Started</button>
+                    <button class="btn-ghost" onclick="showNotice()">Read Docs ↗</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── FOOTER ────────────────────────────────────────────── -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-inner">
+                <a href="#top" class="footer-logo" aria-label="Back to top">
+                    <img src="FattOs.png" alt="" width="28" height="28" aria-hidden="true">
+                    <span>FattOs<sup>™</sup></span>
+                </a>
+                <p class="footer-copy">
+                    &copy; 2026 <span class="font-alex">glassPebble</span> &mdash; FattOs™ is a trademark of glassPebble.
+                </p>
+                <p class="footer-note">Not yet publicly released.</p>
+            </div>
         </div>
     </footer>
 
-    <!-- Interactive Toast (No alert) -->
-    <div id="infoNotice" class="fixed bottom-6 right-6 max-w-xs bg-[#FAF8F5] border border-[#c3a15d]/60 text-[#2B2823] p-4 rounded-xl shadow-md hidden transition-all duration-300 z-50">
-        <p class="font-fredoka text-sm font-medium text-[#c3a15d] mb-1">FattOs Core</p>
-        <p class="text-xs text-[#625B50] leading-relaxed">
-            FattOs headers and scheduling documentation are configured for ESP32-S3 and STM32 targets.
-        </p>
+    <!-- ── TOAST ─────────────────────────────────────────────── -->
+    <div id="infoNotice" class="toast" role="status" aria-live="polite" aria-atomic="true" hidden>
+        <div class="toast-icon" aria-hidden="true">
+            <svg viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+            </svg>
+        </div>
+        <div class="toast-body">
+            <p class="toast-title">FattOs is not ready yet</p>
+            <p class="toast-msg">Docs and getting-started guides are still being written. Check back soon!</p>
+        </div>
+        <button class="toast-close" aria-label="Dismiss" onclick="hideNotice()">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+        </button>
     </div>
 
-    <script>
-        function showNotice() {
-            const notice = document.getElementById('infoNotice');
-            notice.classList.remove('hidden');
-            setTimeout(() => {
-                notice.classList.add('hidden');
-            }, 4000);
-        }
-    </script>
+    <script src="main.js"></script>
 </body>
+
 </html>
