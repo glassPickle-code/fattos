@@ -91,6 +91,9 @@ By downloading, using, modifying, or redistributing FattOS, you acknowledge that
 
 For questions about this licence or requests for commercial permission, contact glassPickle at **glasspickle.gogleacc@gmail.com**.
 
+*This email is expected to change soon.
+
+
 ---
 
 **FattOS — Developed by glassPickle**
