@@ -190,4 +190,4 @@ callbacks and timer callbacks must be short, non-blocking, and return
 promptly. The scheduler executes at most one callback at a time.
 
 ## License
-MIT. See `LICENSE`.
+See `LICENSE`.
